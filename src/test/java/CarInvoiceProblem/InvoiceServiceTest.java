@@ -1,6 +1,7 @@
 package CarInvoiceProblem;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -33,7 +34,8 @@ public class InvoiceServiceTest {
 	@Test
 	public void givenMultipleRidesReturnTotalFare() {
 		Ride[] rides = { new Ride(2.0, 5), new Ride(2.0, 5), new Ride(0.1, 1) };
-		double expectedOutput = invoiceService.getFare(rides);
-		assertEquals(55, expectedOutput, 0);
+		InvoiceSummary expectedSummary = new InvoiceSummary(55, 3);
+		InvoiceSummary summary = invoiceService.getFare(rides);
+		assertEquals(expectedSummary, summary);
 	}
 }
