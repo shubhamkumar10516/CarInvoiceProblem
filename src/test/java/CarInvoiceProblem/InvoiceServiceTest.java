@@ -8,6 +8,7 @@ import org.junit.Before;
 public class InvoiceServiceTest {
 	InvoiceService invoiceService = null;
 
+	//initialization of invoiceService object
 	@Before
 	public void loadData() {
 		invoiceService = new InvoiceService();
