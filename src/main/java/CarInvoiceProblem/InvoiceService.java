@@ -1,10 +1,17 @@
 package CarInvoiceProblem;
 
+import java.util.List;
 
 public class InvoiceService {
 	private static final double MINIMUM_COST_PER_KILOMETER = 10;
 	private static final int COST_PER_TIME = 1;
 	private static final double MINIMUM_FARE = 5;
+	RideRepository rideRepository;
+
+	// initializing rideRepository instance
+	InvoiceService() {
+		rideRepository = new RideRepository();
+	}
 
 	// calculate total fare for given distance and time
 	public double getFare(double distance, int time) {
@@ -19,5 +26,23 @@ public class InvoiceService {
 			totalFare += getFare(ride.getDistance(), ride.getTime());
 
 		return new InvoiceSummary(totalFare, rides.length);
+	}
+
+	// generating invoice for user id
+	public InvoiceSummary getInvoiceSummary(String userId) {
+		List<Ride> rideList = rideRepository.getRides(userId);
+		return new InvoiceSummary(getFare(rideList), rideList.size());
+	}
+
+	private double getFare(List<Ride> rideList) {
+		double totalFare = 0;
+		for (Ride ride : rideList)
+			totalFare += getFare(ride.getDistance(), ride.getTime());
+		return totalFare;
+	}
+
+	// adding rides
+	public void addRides(String userId, Ride[] rides) {
+		rideRepository.addRides(userId, rides);
 	}
 }
