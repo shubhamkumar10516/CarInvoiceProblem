@@ -29,4 +29,11 @@ public class InvoiceServiceTest {
 		double fare = invoiceService.getFare(distance, time);
 		assertEquals(5, fare, 0);
 	}
+	
+	@Test
+	public void givenMultipleRidesReturnTotalFare() {
+		Ride[] rides = { new Ride(2.0, 5), new Ride(2.0, 5), new Ride(0.1, 1) };
+		double expectedOutput = invoiceService.getFare(rides);
+		assertEquals(55, expectedOutput, 0);
+	}
 }
