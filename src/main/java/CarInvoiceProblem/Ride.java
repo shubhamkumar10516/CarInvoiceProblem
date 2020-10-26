@@ -3,10 +3,13 @@ package CarInvoiceProblem;
 public class Ride {
 	private double distance;
 	private int time;
-    public Ride(double distance, int time) {
-    	this.distance = distance;
+	CabRide rideType;
+    
+	public Ride(CabRide rideType, double distance, int time) {
+		this.rideType = rideType;
+		this.distance = distance;
     	this.time = time;
-    }
+	}
 	public double getDistance() {
 		return distance;
 	}

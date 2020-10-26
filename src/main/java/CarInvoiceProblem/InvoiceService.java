@@ -9,8 +9,8 @@ public class InvoiceService {
 	RideRepository rideRepository;
 
 	// initializing rideRepository instance
-	InvoiceService() {
-		rideRepository = new RideRepository();
+	public void setRideRepository(RideRepository rideRepository) {
+		this.rideRepository = rideRepository;
 	}
 
 	// calculate total fare for given distance and time
@@ -23,8 +23,7 @@ public class InvoiceService {
 	public InvoiceSummary getFare(Ride[] rides) {
 		double totalFare = 0;
 		for (Ride ride : rides)
-			totalFare += getFare(ride.getDistance(), ride.getTime());
-
+			totalFare += ride.rideType.calculateCostOfCabRide(ride);
 		return new InvoiceSummary(totalFare, rides.length);
 	}
 
@@ -37,7 +36,7 @@ public class InvoiceService {
 	private double getFare(List<Ride> rideList) {
 		double totalFare = 0;
 		for (Ride ride : rideList)
-			totalFare += getFare(ride.getDistance(), ride.getTime());
+			totalFare += ride.rideType.calculateCostOfCabRide(ride);
 		return totalFare;
 	}
 
